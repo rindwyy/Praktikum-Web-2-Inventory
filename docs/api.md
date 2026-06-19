@@ -208,7 +208,7 @@ Dokumentasi API untuk sistem inventaris barang. Seluruh endpoint menggunakan pre
 
 ### 1. Menarik Semua Item
 * **Method:** `GET`
-* **URL:** `/items`
+* **URL:** `/items` atau `/items?category_id={id}`
 * **Headers:**
   ```http
   Accept: application/json
