@@ -22,14 +22,12 @@ class ItemController extends BaseController
 
     public function index(Request $request): JsonResponse
 {
-    // Dapatkan seluruh data item dengan relasi kategori
     $items = $this->svc->all();
 
-    // Lakukan filtering di memori PHP jika category_id dikirimkan
     if ($request->filled('category_id')) {
         $items = $items->filter(fn($item) => 
             $item->category_id == $request->category_id
-        )->values(); // values() wajib digunakan untuk mereset index array JSON
+        )->values(); 
     }
 
     return $this->success($items, 'Berhasil menarik semua data Item');
