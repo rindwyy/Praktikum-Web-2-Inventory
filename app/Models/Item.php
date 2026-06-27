@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-// Tambahkan baris di bawah ini:
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Item extends Model
@@ -12,13 +11,13 @@ class Item extends Model
 
     protected $fillable = [
         'name',
-        'category_id', // Jangan lupa tambahkan kolom lain jika ada
+        'category_id',
         'description',
-        'stock',
+        'quantity',
         'price'
     ];
 
-    public function category() {
+    public function category() {    
         return $this->belongsTo(Category::class);
     }
 }

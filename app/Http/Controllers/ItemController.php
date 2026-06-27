@@ -34,11 +34,12 @@ class ItemController extends BaseController
 }
 
 
-  public function store(StoreItemRequest $req): JsonResponse
+    public function store(\App\Http\Requests\StoreItemRequest $req): \Illuminate\Http\JsonResponse
   {
       $item = $this->svc->create($req->validated());
       return $this->success($item, 'Item berhasil dibuat', 201);
   }
+
 
   public function show($id): JsonResponse
   {
@@ -59,6 +60,6 @@ class ItemController extends BaseController
   public function destroy($id): JsonResponse
   {
       $this->svc->delete($id);
-      return $this->success(null, 'Item berhasil dihapus');
+      return response()->json(null, 204);
   }
 }

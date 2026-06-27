@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\Item;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -12,17 +13,42 @@ class ItemService {
     public function find(int $id): Item {
         return Item::with('category')->findOrFail($id);
     }
-    public function create(array $data): Item {
-        return Item::create($data);
+
+    public function create(array $data)
+{
+    $item = Item::create($data);
+
+    Log::info('Item created', [
+        'id' => $item->id,
+        'data' => $data
+    ]);
+
+    return $item;
     }
-    public function update(int $id, array $data): Item {
-        $item = Item::findOrFail($id);
-        $item->update($data);
-        
-        return $item;
+
+   public function update($id, array $data)
+    {
+    $item = Item::findOrFail($id);
+
+    $item->update($data);
+
+    Log::info('Item updated', [
+        'id' => $id,
+        'changes' => $data
+    ]);
+
+    return $item;
     }
-    public function delete(int $id): void {
     
-        Item::destroy($id);
+    public function delete($id)
+    {
+    $item = Item::findOrFail($id);
+
+    $item->delete();
+
+    Log::info('Item deleted', [
+        'id' => $id
+    ]);
     }
+
 }
